@@ -40,7 +40,7 @@ jobs:
           git config user.name "commodity-market-intel-bot"
           git config user.email "actions@github.com"
 
-          git add data/commodities.duckdb
+          git add src/natgas-market-intel/data/commodities.duckdb
 
           if git diff --cached --quiet; then
             echo "No data changes."
