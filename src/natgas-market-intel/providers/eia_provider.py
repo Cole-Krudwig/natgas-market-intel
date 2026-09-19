@@ -8,21 +8,19 @@ import requests
 from dotenv import load_dotenv
 
 
-# ============================================================
-# ENVIRONMENT
-# ============================================================
-
+# Local development: load .env if present
 current_dir = Path(__file__).resolve().parent
+env_path = current_dir.parent / ".env"
 
-# Keep your existing .env lookup.
-env_path = current_dir.parent.parent.parent / ".env"
-load_dotenv(env_path)
+if env_path.exists():
+    load_dotenv(env_path)
 
+# Works both locally and in GitHub Actions
 EIA_KEY = os.getenv("EIA_KEY")
 
 if not EIA_KEY:
     raise RuntimeError(
-        f"EIA_KEY was not found. Expected .env at: {env_path}"
+        "EIA_KEY environment variable is not set."
     )
 
 
