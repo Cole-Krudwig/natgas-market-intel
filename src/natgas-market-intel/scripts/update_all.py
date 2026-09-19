@@ -1,33 +1,40 @@
 import subprocess
 import sys
+from pathlib import Path
+
+
+PROJECT_DIR = Path(__file__).resolve().parents[1]
+SCRIPTS_DIR = PROJECT_DIR / "scripts"
 
 
 SCRIPTS = [
-    "scripts/update_yfinance.py",
-    "scripts/update_eia.py",
-    "scripts/update_noaa.py",
-    # "scripts/update_cftc.py",
+    "update_yfinance.py",
+    "update_eia.py",
+    "update_noaa.py",
 ]
 
 
-def run_script(script):
-    print(f"\n{'=' * 70}")
-    print(f"Running {script}")
+def run_script(script_name):
+    script_path = SCRIPTS_DIR / script_name
+
+    print()
+    print("=" * 70)
+    print(f"Running {script_path}")
     print("=" * 70)
 
-    result = subprocess.run(
-        [sys.executable, script],
+    subprocess.run(
+        [sys.executable, str(script_path)],
+        cwd=str(PROJECT_DIR),
         check=True,
     )
-
-    return result.returncode
 
 
 def main():
     for script in SCRIPTS:
         run_script(script)
 
-    print("\nAll daily updates completed successfully.")
+    print()
+    print("All daily updates completed successfully.")
 
 
 if __name__ == "__main__":
