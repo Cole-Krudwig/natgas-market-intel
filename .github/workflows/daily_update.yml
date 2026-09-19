@@ -33,7 +33,7 @@ jobs:
           EIA_KEY: ${{ secrets.EIA_KEY }}
           NOAA_KEY: ${{ secrets.NOAA_KEY }}
         run: |
-          python scripts/update_all.py
+          python src/natgas-market-intel/scripts/update_all.py
 
       - name: Commit updated data
         run: |
