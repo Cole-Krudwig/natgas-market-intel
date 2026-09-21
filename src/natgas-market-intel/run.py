@@ -12,7 +12,7 @@ DATABASE_PATH = Path(__file__).resolve().parent / "data" / "commodities.duckdb"
 
 st.set_page_config(page_title="Natural Gas Market Intel", layout="wide")
 st.title("Natural Gas Futures")
-st.caption("Daily NYMEX Henry Hub futures data from the local DuckDB database.")
+st.caption("Daily NYMEX Henry Hub futures data")
 st.markdown(
     "[Market Overview](#market-overview) &nbsp;|&nbsp; "
     "[Futures Curve](#futures-curve) &nbsp;|&nbsp; "
@@ -193,7 +193,6 @@ else:
         fair_diagnostic_metrics[2].metric("Out-of-sample R^2", f"{fair_diagnostic.r2:.3f}")
         st.caption(f"Chronological training: {pd.to_datetime(fair_diagnostic.train_start).date()} to {pd.to_datetime(fair_diagnostic.train_end).date()}; test: {pd.to_datetime(fair_diagnostic.test_start).date()} to {pd.to_datetime(fair_diagnostic.test_end).date()}.")
     st.dataframe(winter_fair_coefficients.rename(columns={"coefficient": "Linear coefficient"}), hide_index=True, use_container_width=True)
-    st.caption("Positive or negative spread meaning depends on the stated spread definition. Z-score measures unusualness versus prior-year observations from the same calendar month. Fair-value deviation compares the observed Winter-Summer spread with the model estimate from dated storage state, weather anomalies, and seasonal controls. Historical abnormality does not automatically imply a trading opportunity.")
 
 st.markdown('<a id="weather-adjusted-storage-balance"></a>', unsafe_allow_html=True)
 st.header("Weather-Adjusted Storage Balance")
